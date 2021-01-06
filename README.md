@@ -1,4 +1,4 @@
-# @monaco-editor/core &middot; [![monthly downloads](https://img.shields.io/npm/dm/@monaco-editor/core)](https://www.npmjs.com/package/@monaco-editor/core) [![gitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/suren-atoyan/monaco-core/blob/master/LICENSE) [![npm version](https://img.shields.io/npm/v/@monaco-editor/core.svg?style=flat)](https://www.npmjs.com/package/@monaco-editor/core) [![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/suren-atoyan/monaco-core/pulls)
+# @monaco-editor/loader &middot; [![monthly downloads](https://img.shields.io/npm/dm/@monaco-editor/loader)](https://www.npmjs.com/package/@monaco-editor/loader) [![gitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/suren-atoyan/monaco-loader/blob/master/LICENSE) [![npm version](https://img.shields.io/npm/v/@monaco-editor/loader.svg?style=flat)](https://www.npmjs.com/package/@monaco-editor/loader) [![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/suren-atoyan/monaco-loader/pulls)
 
 The utility to easy setup `monaco-editor` into your browser
 
@@ -30,13 +30,13 @@ Monaco editor provides a script called `lodaer`, which itself provides tooling t
 ### Installation
 
 ```bash
-npm install @monaco-editor/core
+npm install @monaco-editor/loader
 ```
 
 or
 
 ```bash
-yarn add @monaco-editor/core
+yarn add @monaco-editor/loader
 ```
 
 NOTE: For TypeScript type definitions, this package uses the [monaco-editor](https://www.npmjs.com/package/monaco-editor) package as a peer dependency. So, if you need types and don't already have the [monaco-editor](https://www.npmjs.com/package/monaco-editor) package installed, you will need to do so.
@@ -51,7 +51,7 @@ The library exports types and the utility called `monaco`, the last one has two 
 ### Usage
 
 ```javascript
-import monaco from '@monaco-editor/core';
+import monaco from '@monaco-editor/loader';
 
 monaco.init().then(monacoInstance => {
   monacoInstance.editor.create(/* editor container, e.g. document.body */, {
@@ -68,7 +68,7 @@ monaco.init().then(monacoInstance => {
 By using the `.config` method we can configure the monaco loader. By default all sources come from CDN, you can change that behavior and load them from wherever you want
 
 ```javascript
-import monaco from '@monaco-editor/core';
+import monaco from '@monaco-editor/loader';
 
 // you can change the source of the monaco files
 monaco.config({ paths: { vs: '...' } });
@@ -98,7 +98,7 @@ monaco.init().then(monacoInstance => { /* ... */ });
 The `.init` method handles the initialization process. It returns the monaco instance, wrapped with cancelable promise
 
 ```javascript
-import monaco from '@monaco-editor/core';
+import monaco from '@monaco-editor/loader';
 
 monaco.init().then(monacoInstance => {
   console.log('Here is the monaco instance', monacoInstance);
@@ -108,7 +108,7 @@ monaco.init().then(monacoInstance => {
 [codesandbox]()
 
 ```javascript
-import monaco from '@monaco-editor/core';
+import monaco from '@monaco-editor/loader';
 
 const cancelable = monaco.init();
 
@@ -128,10 +128,10 @@ cancelable.cancel();
 In general it works fine with electron, but there are several cases that developers usually face to and sometimes it can be confusing. Here they are:
 
 1) **Download process fails** or if you use @monaco-editor/react **You see loading screen stuck**
-Usually, it's because your environment doesn't allow you to load external sources. By default, it loads monaco sources from CDN. You can see the [default configuration](https://github.com/suren-atoyan/monaco-core/blob/master/src/config/index.js#L3). But sure you can change that behavior; the library is fully configurable. Read about it [here](https://github.com/suren-atoyan/monaco-core#config). So, if you want to download it from your local files, you can do it like this:
+Usually, it's because your environment doesn't allow you to load external sources. By default, it loads monaco sources from CDN. You can see the [default configuration](https://github.com/suren-atoyan/monaco-loader/blob/master/src/config/index.js#L3). But sure you can change that behavior; the library is fully configurable. Read about it [here](https://github.com/suren-atoyan/monaco-loader#config). So, if you want to download it from your local files, you can do it like this:
 
 ```javascript
-import monaco from '@monaco-editor/core';
+import monaco from '@monaco-editor/loader';
 
 monaco.config({ paths: { vs: '../path-to-monaco' } });
 ```
