@@ -61,7 +61,7 @@ monaco.init().then(monacoInstance => {
 });
 ```
 
-[codesandbox]()
+[codesandbox](https://codesandbox.io/s/simple-usage-os49p)
 
 #### .config
 
@@ -91,7 +91,7 @@ monaco.config({
 monaco.init().then(monacoInstance => { /* ... */ });
 ```
 
-[codesandbox]()
+[codesandbox](https://codesandbox.io/s/config-o6zn6)
 
 #### .init
 
@@ -105,7 +105,7 @@ monaco.init().then(monacoInstance => {
 });
 ```
 
-[codesandbox]()
+[codesandbox](https://codesandbox.io/s/init-q2ipt)
 
 ```javascript
 import monaco from '@monaco-editor/loader';
@@ -119,7 +119,7 @@ cancelable.then(monacoInstance => {
 cancelable.cancel();
 ```
 
-[codesandbox]()
+[codesandbox](https://codesandbox.io/s/init-cancelable-9o42y)
 
 #### Notes
 
