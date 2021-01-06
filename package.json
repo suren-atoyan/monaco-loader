@@ -1,6 +1,6 @@
 {
   "name": "@monaco-editor/core",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "this library aims to setup monaco editor into your browser",
   "main": "lib/cjs/monaco-core.js",
   "module": "lib/es/monaco-core.js",
