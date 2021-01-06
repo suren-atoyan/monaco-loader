@@ -35,7 +35,7 @@ export default [
   {
     input: 'src/index.js',
     output: {
-      file: 'lib/cjs/monaco-core.js',
+      file: 'lib/cjs/monaco-loader.js',
       format: 'cjs',
       exports: 'default',
     },
@@ -44,7 +44,7 @@ export default [
   {
     input: 'src/index.js',
     output: {
-      file: 'lib/es/monaco-core.js',
+      file: 'lib/es/monaco-loader.js',
       format: 'es',
     },
     plugins: commonPlugins,
@@ -52,18 +52,18 @@ export default [
   {
     input: 'src/index.js',
     output: {
-      file: 'lib/umd/monaco-core.js',
+      file: 'lib/umd/monaco-loader.js',
       format: 'umd',
-      name: 'monaco_core',
+      name: 'monaco_loader',
     },
     plugins: developmentPlugins,
   },
   {
     input: 'src/index.js',
     output: {
-      file: 'lib/umd/monaco-core.min.js',
+      file: 'lib/umd/monaco-loader.min.js',
       format: 'umd',
-      name: 'monaco_core',
+      name: 'monaco_loader',
     },
     plugins: productionPlugins,
   },

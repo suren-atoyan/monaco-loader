@@ -31,7 +31,7 @@ function throwError(errorMessages, type) {
 const errorMessages = {
   configIsRequired: 'the configuration object is required',
   configType: 'the configuration object should be an object',
-  default: 'an unknown error accured in `@monaco-editor/core` package',
+  default: 'an unknown error accured in `@monaco-editor/loader` package',
 
   deprecation: `Deprecation warning!
     You are using deprecated way of configuration.
@@ -41,7 +41,7 @@ const errorMessages = {
     use
       monaco.config({ paths: { vs: '...' } })
 
-    For more please check the link https://github.com/suren-atoyan/monaco-core#config
+    For more please check the link https://github.com/suren-atoyan/monaco-loader#config
   `,
 };
 
