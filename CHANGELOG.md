@@ -1,3 +1,8 @@
+## 0.1.2
+###### *Jan 7, 2021*
+
+- package: add jsdelivr source path
+
 ## 0.1.1
 ###### *Jan 7, 2021*
 

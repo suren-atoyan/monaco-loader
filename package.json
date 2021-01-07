@@ -1,6 +1,6 @@
 {
   "name": "@monaco-editor/loader",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "the library aims to setup monaco editor into your browser",
   "main": "lib/cjs/monaco-loader.js",
   "module": "lib/es/monaco-loader.js",
