@@ -31,9 +31,12 @@ const productionPlugins = [
   terser({ mangle: false }),
 ];
 
+const external = ['state-local'];
+
 export default [
   {
     input: 'src/index.js',
+    external,
     output: {
       file: 'lib/cjs/monaco-loader.js',
       format: 'cjs',
@@ -43,6 +46,7 @@ export default [
   },
   {
     input: 'src/index.js',
+    external,
     output: {
       file: 'lib/es/monaco-loader.js',
       format: 'es',
