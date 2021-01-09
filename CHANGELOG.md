@@ -1,3 +1,9 @@
+## 0.1.3
+###### *Jan 8, 2021*
+
+- build: in `cjs` and `es` bundles `state-local` is marked as externam lib
+- build: in `cjs` and `es` modules structure is preserved - `output.preserveModules = true`
+
 ## 0.1.2
 ###### *Jan 7, 2021*
 
