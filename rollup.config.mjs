@@ -38,9 +38,10 @@ export default [
     input: 'src/index.js',
     external,
     output: {
-      file: 'lib/cjs/monaco-loader.js',
+      dir: 'lib/cjs/',
       format: 'cjs',
-      exports: 'default',
+      exports: 'named',
+      preserveModules: true,
     },
     plugins: commonPlugins,
   },
@@ -48,8 +49,9 @@ export default [
     input: 'src/index.js',
     external,
     output: {
-      file: 'lib/es/monaco-loader.js',
+      dir: 'lib/es/',
       format: 'es',
+      preserveModules: true,
     },
     plugins: commonPlugins,
   },
