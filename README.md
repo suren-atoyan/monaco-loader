@@ -12,7 +12,7 @@ It's been a while we are working with `monaco editor`. It's a great library and 
 
 ## How it works
 
-Monaco editor provides a script called `lodaer`, which itself provides tooling to download monaco sources. The library, under the hood, handles the configuration and loading part and gives us an easy-to-use API to interact with it
+Monaco editor provides a script called `loader`, which itself provides tooling to download monaco sources. The library, under the hood, handles the configuration and loading part and gives us an easy-to-use API to interact with it
 
 ## Documentation
 
