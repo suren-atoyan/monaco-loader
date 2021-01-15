@@ -2,7 +2,7 @@ import * as monacoEditor from 'monaco-editor/esm/vs/editor/editor.api';
 
 export type Monaco = typeof monacoEditor;
 
-declare namespace monaco {
+declare namespace loader {
   function init(): Promise<Monaco>;
   function config(params: {
     paths?: {
@@ -11,7 +11,8 @@ declare namespace monaco {
     'vs/nls'?: {
       availableLanguages?: object,
     },
-  }): void
+  }): void;
+  function __getMonacoInstance(): Monaco | null;
 }
 
-export default monaco;
+export default loader;

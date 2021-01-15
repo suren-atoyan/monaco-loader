@@ -43,7 +43,7 @@ NOTE: For TypeScript type definitions, this package uses the [monaco-editor](htt
 
 ### Introduction
 
-The library exports types and the utility called `monaco`, the last one has two methods
+The library exports types and the utility called `loader`, the last one has two methods
 
 * [.config](#config)
 * [.init](#init)
@@ -51,10 +51,10 @@ The library exports types and the utility called `monaco`, the last one has two 
 ### Usage
 
 ```javascript
-import monaco from '@monaco-editor/loader';
+import loader from '@monaco-editor/loader';
 
-monaco.init().then(monacoInstance => {
-  monacoInstance.editor.create(/* editor container, e.g. document.body */, {
+loader.init().then(monaco => {
+  monaco.editor.create(/* editor container, e.g. document.body */, {
     value: '// some comment',
     language: 'javascript',
   });
@@ -68,16 +68,16 @@ monaco.init().then(monacoInstance => {
 By using the `.config` method we can configure the monaco loader. By default all sources come from CDN, you can change that behavior and load them from wherever you want
 
 ```javascript
-import monaco from '@monaco-editor/loader';
+import loader from '@monaco-editor/loader';
 
 // you can change the source of the monaco files
-monaco.config({ paths: { vs: '...' } });
+loader.config({ paths: { vs: '...' } });
 
 // you can configure the locales
-monaco.config({ 'vs/nls': { availableLanguages: { '*': 'de' } } });
+loader.config({ 'vs/nls': { availableLanguages: { '*': 'de' } } });
 
 // or
-monaco.config({
+loader.config({
   paths: {
     vs: '...',
   },
@@ -88,7 +88,7 @@ monaco.config({
   },
 });
 
-monaco.init().then(monacoInstance => { /* ... */ });
+loader.init().then(monaco => { /* ... */ });
 ```
 
 [codesandbox](https://codesandbox.io/s/config-o6zn6)
@@ -98,21 +98,21 @@ monaco.init().then(monacoInstance => { /* ... */ });
 The `.init` method handles the initialization process. It returns the monaco instance, wrapped with cancelable promise
 
 ```javascript
-import monaco from '@monaco-editor/loader';
+import loader from '@monaco-editor/loader';
 
-monaco.init().then(monacoInstance => {
-  console.log('Here is the monaco instance', monacoInstance);
+loader.init().then(monaco => {
+  console.log('Here is the monaco instance', monaco);
 });
 ```
 
 [codesandbox](https://codesandbox.io/s/init-q2ipt)
 
 ```javascript
-import monaco from '@monaco-editor/loader';
+import loader from '@monaco-editor/loader';
 
-const cancelable = monaco.init();
+const cancelable = loader.init();
 
-cancelable.then(monacoInstance => {
+cancelable.then(monaco => {
   console.log('You will not see it, as it is canceled');
 });
 
@@ -131,9 +131,9 @@ In general it works fine with electron, but there are several cases that develop
 Usually, it's because your environment doesn't allow you to load external sources. By default, it loads monaco sources from CDN. You can see the [default configuration](https://github.com/suren-atoyan/monaco-loader/blob/master/src/config/index.js#L3). But sure you can change that behavior; the library is fully configurable. Read about it [here](https://github.com/suren-atoyan/monaco-loader#config). So, if you want to download it from your local files, you can do it like this:
 
 ```javascript
-import monaco from '@monaco-editor/loader';
+import loader from '@monaco-editor/loader';
 
-monaco.config({ paths: { vs: '../path-to-monaco' } });
+loader.config({ paths: { vs: '../path-to-monaco' } });
 ```
 
 2) **Based on your electron environment it can be required to have an absolute URL**
@@ -151,7 +151,7 @@ function uriFromPath(_path) {
     return encodeURI('file://' + ensureFirstBackSlash(pathName));
 }
 
-monaco.config({
+loader.config({
   paths: {
     vs: uriFromPath(
       path.join(__dirname, '../node_modules/monaco-editor/min/vs')

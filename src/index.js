@@ -1,3 +1,3 @@
-import monaco from './monaco';
+import loader from './loader';
 
-export default monaco;
+export default loader;
