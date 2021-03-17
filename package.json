@@ -20,7 +20,7 @@
     "build": "rollup -c && cp ./src/types.d.ts ./lib/"
   },
   "peerDependencies": {
-    "monaco-editor": "^0.21.2"
+    "monaco-editor": ">= 0.21.0 < 0.24.0"
   },
   "keywords": [
     "monaco",
