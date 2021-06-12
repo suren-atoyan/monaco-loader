@@ -1,3 +1,8 @@
+## 1.1.0
+###### *Jun 12, 2021*
+
+- monaco-editor: update to the latest version (0.25.0)
+
 ## 1.0.1
 ###### *Mar 18, 2021*
 
