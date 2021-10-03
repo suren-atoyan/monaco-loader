@@ -1,3 +1,9 @@
+## 1.2.0
+###### *Oct 3, 2021*
+
+- monaco-editor: update to the latest version (0.28.1)
+- types: fix CancelablePromise type
+
 ## 1.1.1
 ###### *Jun 21, 2021*
 
