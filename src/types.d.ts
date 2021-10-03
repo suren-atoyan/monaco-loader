@@ -2,8 +2,12 @@ import * as monacoEditor from 'monaco-editor/esm/vs/editor/editor.api';
 
 export type Monaco = typeof monacoEditor;
 
+interface CancelablePromise<T> extends Promise<T> {
+  cancel: () => void;
+}
+
 declare namespace loader {
-  function init(): Promise<Monaco> & { cancel: () => void };
+  function init(): CancelablePromise<Monaco>;
   function config(params: {
     paths?: {
       vs?: string,
