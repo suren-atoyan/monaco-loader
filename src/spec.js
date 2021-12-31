@@ -32,9 +32,15 @@ describe('.config', () => {
       return () => loader.config(config);
     }
 
-    expect(callConfigWithNonObjectFirstArgument('string')).toThrow(errorMessages.configType);
-    expect(callConfigWithNonObjectFirstArgument([1, 2, 3])).toThrow(errorMessages.configType);
-    expect(callConfigWithNonObjectFirstArgument(x => x + 1)).toThrow(errorMessages.configType);
+    expect(callConfigWithNonObjectFirstArgument('string')).toThrow(
+      errorMessages.configType
+    );
+    expect(callConfigWithNonObjectFirstArgument([1, 2, 3])).toThrow(
+      errorMessages.configType
+    );
+    expect(callConfigWithNonObjectFirstArgument((x) => x + 1)).toThrow(
+      errorMessages.configType
+    );
   });
 
   // test 4 - check if `config` warns about deprecation when there is a `urls`
@@ -52,7 +58,7 @@ describe('.config', () => {
 });
 
 // 2) `.init`
-// `init` is a function without parameters
+// `init` is a function with one parameter (optional)
 // it handle the initialization process of monaco-editor
 // returns an instance of monaco (with a cancelable promise)
 
@@ -60,6 +66,14 @@ describe('.init', () => {
   // test 1 - check if `init` is a function
   test('should be a function', () => {
     expect(loader.init).toBeInstanceOf(Function);
+  });
+
+  test('should return monaco instance', (done) => {
+    // load from inline object
+    loader.init({ monaco: { editor: {} } }).then((result) => {
+      expect(result).toHaveProperty('editor');
+      done();
+    });
   });
 });
 
@@ -76,7 +90,29 @@ describe('.__getMonacoInstance', () => {
 
   // test 2 - check if `__getMonacoInstance` returns `null`
   // as the initialization (.init) wasn't triggered
-  test('should return null', () => {
-    expect(loader.__getMonacoInstance()).toBe(null);
+  test('should return monaco instance', (done) => {
+    loader.init({ monaco: { editor: {} } }).then(() => {
+      expect(loader.__getMonacoInstance()).toHaveProperty('editor');
+      done();
+    });
+  });
+});
+
+// 4) `.dispose`
+// `dispose` is a function without parameters
+// it will set loader's internal state to default values
+describe('.dispose', () => {
+  // test 1 - check if `init` is a function
+  test('should be a function', () => {
+    expect(loader.dispose).toBeInstanceOf(Function);
+  });
+
+  test('should dispose', (done) => {
+    loader.init({ monaco: { editor: {} } }).then((result) => {
+      expect(result).toHaveProperty('editor');
+      loader.dispose();
+      expect(loader.__getMonacoInstance()).toBe(null);
+      done();
+    });
   });
 });

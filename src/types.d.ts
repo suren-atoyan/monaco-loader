@@ -7,7 +7,8 @@ interface CancelablePromise<T> extends Promise<T> {
 }
 
 declare namespace loader {
-  function init(): CancelablePromise<Monaco>;
+  function init(options?: { monaco?: Monaco }): CancelablePromise<Monaco>;
+  function dispose(): void;
   function config(params: {
     paths?: {
       vs?: string,

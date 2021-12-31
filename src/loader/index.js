@@ -10,7 +10,6 @@ import state from 'state-local';
 
 import defaultConfig from '../config';
 import validators from '../validators';
-import compose from '../utils/compose';
 import deepMerge from '../utils/deepMerge';
 import makeCancelable from '../utils/makeCancelable';
 
@@ -18,8 +17,6 @@ import makeCancelable from '../utils/makeCancelable';
 const [getState, setState] = state.create({
   config: defaultConfig,
   isInitialized: false,
-  resolve: null,
-  reject: null,
   monaco: null,
 });
 
@@ -28,36 +25,35 @@ const [getState, setState] = state.create({
  * @param {Object} config - the configuration object
  */
 function config(config) {
-  setState(state => ({
-    config: deepMerge(
-      state.config,
-      validators.config(config),
-    ),
+  setState((state) => ({
+    config: deepMerge(state.config, validators.config(config)),
   }));
 }
-
+let resultPromise = null;
 /**
  * handles the initialization of the monaco-editor
  * @return {Promise} - returns an instance of monaco (with a cancelable promise)
  */
-function init() {
+function init({ monaco } = {}) {
   const state = getState(({ isInitialized }) => ({ isInitialized }));
 
-  if (!state.isInitialized) {
+  if (!state.isInitialized && !resultPromise) {
     if (window.monaco && window.monaco.editor) {
       storeMonacoInstance(window.monaco);
-      return makeCancelable(Promise.resolve(window.monaco));
+      resultPromise = makeCancelable(Promise.resolve(window.monaco));
+      return resultPromise;
+    } else if (monaco) {
+      storeMonacoInstance(monaco);
+      resultPromise = makeCancelable(Promise.resolve(monaco));
+      return resultPromise;
+    } else {
+      resultPromise = makeCancelable(
+        getMonacoLoaderScript().then(configureLoader)
+      );
     }
-
-    compose(
-      injectScripts,
-      getMonacoLoaderScript,
-    )(configureLoader);
-
-    setState({ isInitialized: true });
   }
 
-  return makeCancelable(wrapperPromise);
+  return resultPromise;
 }
 
 /**
@@ -76,45 +72,44 @@ function injectScripts(script) {
  */
 function createScript(src) {
   const script = document.createElement('script');
-  return (src && (script.src = src), script);
+  return src && (script.src = src), script;
 }
 
 /**
  * creates an HTML script element with the monaco loader src
  * @return {Object} - the created HTML script element
  */
-function getMonacoLoaderScript(configureLoader) {
-  const state = getState(({ config, reject }) => ({ config, reject }));
+function getMonacoLoaderScript() {
+  const state = getState();
 
   const loaderScript = createScript(`${state.config.paths.vs}/loader.js`);
-  loaderScript.onload = () => configureLoader();
-
-  loaderScript.onerror = state.reject;
-
-  return loaderScript;
+  return new Promise((resolve, reject) => {
+    loaderScript.onload = () => {
+      resolve();
+    };
+    loaderScript.onerror = reject;
+    injectScripts(loaderScript);
+  });
 }
 
 /**
  * configures the monaco loader
  */
 function configureLoader() {
-  const state = getState(
-    ({ config, resolve, reject }) => ({ config, resolve, reject })
-  );
+  const state = getState(({ config }) => ({ config }));
 
   const require = window.require;
 
   require.config(state.config);
-  require(
-    ['vs/editor/editor.main'],
-    function(monaco) {
+
+  return new Promise((resolve, reject) => {
+    require(['vs/editor/editor.main'], function (monaco) {
       storeMonacoInstance(monaco);
-      state.resolve(monaco);
-    },
-    function(error) {
-      state.reject(error);
-    },
-  );
+      resolve(monaco);
+    }, function (error) {
+      reject(error);
+    });
+  });
 }
 
 /**
@@ -135,6 +130,13 @@ function __getMonacoInstance() {
   return getState(({ monaco }) => monaco);
 }
 
-const wrapperPromise = new Promise((resolve, reject) => setState({ resolve, reject }));
+function dispose() {
+  resultPromise = null;
+  setState({
+    config: defaultConfig,
+    isInitialized: false,
+    monaco: null,
+  });
+}
 
-export default { config, init, __getMonacoInstance };
+export default { config, init, dispose, __getMonacoInstance };
