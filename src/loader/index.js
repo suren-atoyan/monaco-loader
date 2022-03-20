@@ -17,7 +17,6 @@ import makeCancelable from '../utils/makeCancelable';
 /** the local state of the module */
 const [getState, setState] = state.create({
   config: defaultConfig,
-  isInitialized: false,
   resolve: null,
   reject: null,
   monaco: null,
@@ -27,12 +26,15 @@ const [getState, setState] = state.create({
  * set the loader configuration
  * @param {Object} config - the configuration object
  */
-function config(config) {
+function config(globalConfig) {
+  const { monaco, ...config } = validators.config(globalConfig);
+
   setState(state => ({
     config: deepMerge(
       state.config,
-      validators.config(config),
+      config,
     ),
+    monaco,
   }));
 }
 
@@ -41,9 +43,9 @@ function config(config) {
  * @return {Promise} - returns an instance of monaco (with a cancelable promise)
  */
 function init() {
-  const state = getState(({ isInitialized }) => ({ isInitialized }));
+  const state = getState(({ monaco }) => ({ monaco }));
 
-  if (!state.isInitialized) {
+  if (!state.monaco) {
     if (window.monaco && window.monaco.editor) {
       storeMonacoInstance(window.monaco);
       return makeCancelable(Promise.resolve(window.monaco));
@@ -53,8 +55,8 @@ function init() {
       injectScripts,
       getMonacoLoaderScript,
     )(configureLoader);
-
-    setState({ isInitialized: true });
+  } else if (state.monaco) {
+    return makeCancelable(Promise.resolve(state.monaco));
   }
 
   return makeCancelable(wrapperPromise);
