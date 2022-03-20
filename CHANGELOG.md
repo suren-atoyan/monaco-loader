@@ -1,3 +1,12 @@
+## 1.3.0
+###### *Mar 20, 2022*
+
+- types: add optional monaco type into config params
+- utility: implement optional monaco param for config
+- test: fix a test case according to the new changes
+- playground: create a playground for testing the library
+- monaco-editor: update to the latest version (0.33.0)
+
 ## 1.2.0
 ###### *Oct 3, 2021*
 
