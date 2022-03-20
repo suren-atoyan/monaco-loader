@@ -77,6 +77,6 @@ describe('.__getMonacoInstance', () => {
   // test 2 - check if `__getMonacoInstance` returns `null`
   // as the initialization (.init) wasn't triggered
   test('should return null', () => {
-    expect(loader.__getMonacoInstance()).toBe(null);
+    expect(loader.__getMonacoInstance()).toBe(undefined);
   });
 });
