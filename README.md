@@ -93,6 +93,19 @@ loader.init().then(monaco => { /* ... */ });
 
 [codesandbox](https://codesandbox.io/s/config-o6zn6)
 
+#### Configure the package to load the monaco as an npm package
+
+```javascript
+import loader from '@monaco-editor/loader';
+import * as monaco from 'monaco-editor';
+
+loader.config({ monaco });
+
+loader.init().then(monacoInstance => { /* ... */ });
+```
+
+[codesandbox](https://codesandbox.io/s/npm-gswrvh)
+
 #### .init
 
 The `.init` method handles the initialization process. It returns the monaco instance, wrapped with cancelable promise
@@ -136,6 +149,17 @@ import loader from '@monaco-editor/loader';
 loader.config({ paths: { vs: '../path-to-monaco' } });
 ```
 
+or, if you want to use it as an npm package, you can do it like this:
+
+```javascript
+import loader from '@monaco-editor/loader';
+import * as monaco from 'monaco-editor';
+
+loader.config({ monaco });
+
+loader.init().then(monacoInstance => { /* ... */ });
+```
+
 2) **Based on your electron environment it can be required to have an absolute URL**
 The utility function taken from [here](https://github.com/microsoft/monaco-editor-samples/blob/master/electron-amd-nodeIntegration/electron-index.html) can help you to achieve that. Let's imagine you have `monaco-editor` package installed and you want to load monaco from the `node_modules` rather than from CDN: in that case, you can write something like this:
 
@@ -159,6 +183,8 @@ loader.config({
   }
 });
 ```
+
+or, just use it as an npm package.
 
 There were several issues about this topic that can be helpful too - [1](https://github.com/suren-atoyan/monaco-react/issues/48) [2](https://github.com/suren-atoyan/monaco-react/issues/12) [3](https://github.com/suren-atoyan/monaco-react/issues/58) [4](https://github.com/suren-atoyan/monaco-react/issues/87)
 
