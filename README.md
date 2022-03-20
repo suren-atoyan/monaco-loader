@@ -93,7 +93,7 @@ loader.init().then(monaco => { /* ... */ });
 
 [codesandbox](https://codesandbox.io/s/config-o6zn6)
 
-#### Configure the package to load the monaco as an npm package
+#### Configure the loader to load the monaco as an npm package
 
 ```javascript
 import loader from '@monaco-editor/loader';
