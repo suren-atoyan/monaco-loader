@@ -17,6 +17,7 @@ import makeCancelable from '../utils/makeCancelable';
 /** the local state of the module */
 const [getState, setState] = state.create({
   config: defaultConfig,
+  isInitialized: false,
   resolve: null,
   reject: null,
   monaco: null,
@@ -43,9 +44,15 @@ function config(globalConfig) {
  * @return {Promise} - returns an instance of monaco (with a cancelable promise)
  */
 function init() {
-  const state = getState(({ monaco }) => ({ monaco }));
+  const state = getState(({ monaco, isInitialized }) => ({ monaco, isInitialized }));
 
-  if (!state.monaco) {
+  if (!state.isInitialized) {
+    setState({ isInitialized: true });
+
+    if (state.monaco) {
+      return makeCancelable(Promise.resolve(state.monaco));
+    }
+
     if (window.monaco && window.monaco.editor) {
       storeMonacoInstance(window.monaco);
       return makeCancelable(Promise.resolve(window.monaco));
@@ -55,8 +62,6 @@ function init() {
       injectScripts,
       getMonacoLoaderScript,
     )(configureLoader);
-  } else if (state.monaco) {
-    return makeCancelable(Promise.resolve(state.monaco));
   }
 
   return makeCancelable(wrapperPromise);
