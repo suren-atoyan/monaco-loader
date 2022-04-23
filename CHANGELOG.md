@@ -1,3 +1,8 @@
+## 1.3.1
+###### *Apr 23, 2022*
+
+- utility: implement isInitialized flag
+
 ## 1.3.0
 ###### *Mar 20, 2022*
 
