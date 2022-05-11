@@ -1,3 +1,8 @@
+## 1.3.2
+###### *May 11, 2022*
+
+- utility: resolve monaco instance in case of provided monaco instance and global availability
+
 ## 1.3.1
 ###### *Apr 23, 2022*
 
