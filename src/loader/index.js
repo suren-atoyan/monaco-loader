@@ -44,18 +44,20 @@ function config(globalConfig) {
  * @return {Promise} - returns an instance of monaco (with a cancelable promise)
  */
 function init() {
-  const state = getState(({ monaco, isInitialized }) => ({ monaco, isInitialized }));
+  const state = getState(({ monaco, isInitialized, resolve }) => ({ monaco, isInitialized, resolve }));
 
   if (!state.isInitialized) {
     setState({ isInitialized: true });
 
     if (state.monaco) {
-      return makeCancelable(Promise.resolve(state.monaco));
+      state.resolve(state.monaco);
+      return makeCancelable(wrapperPromise);
     }
 
     if (window.monaco && window.monaco.editor) {
       storeMonacoInstance(window.monaco);
-      return makeCancelable(Promise.resolve(window.monaco));
+      state.resolve(window.monaco);
+      return makeCancelable(wrapperPromise);
     }
 
     compose(
