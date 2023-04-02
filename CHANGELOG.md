@@ -1,3 +1,8 @@
+## 1.3.3
+###### *Apr 2, 2023*
+
+- monaco-editor: update to the latest version (0.36.1)
+
 ## 1.3.2
 ###### *May 11, 2022*
 
