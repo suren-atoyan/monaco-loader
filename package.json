@@ -16,7 +16,7 @@
     "test-watch": "npm run build && jest --watch",
     "coverage": "jest --collect-coverage",
     "lint": "npx eslint src",
-    "prepublish": "npm test && npm run lint && npm run build",
+    "prepublishOnly": "npm test && npm run lint && npm run build",
     "build": "rollup -c && cp ./src/types.d.ts ./lib/"
   },
   "peerDependencies": {
