@@ -1,3 +1,9 @@
+## 1.5.0
+###### *Feb 13, 2025*
+
+- monaco-editor: update to the latest version (0.52.2)
+- package: remove monaco-editor from peerDependencies
+
 ## 1.4.0
 ###### *Oct 1, 2023*
 
