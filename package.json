@@ -19,9 +19,6 @@
     "prepublishOnly": "npm test && npm run lint && npm run build",
     "build": "rollup -c && cp ./src/types.d.ts ./lib/"
   },
-  "peerDependencies": {
-    "monaco-editor": ">= 0.21.0 < 1"
-  },
   "keywords": [
     "monaco",
     "editor",
