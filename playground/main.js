@@ -26,7 +26,6 @@ self.MonacoEnvironment = {
 }
 
 loader.config({ monaco });
-
 loader.init().then(monaco => monaco.editor.create(document.body, {
   value: '// some comment',
   language: 'javascript',
