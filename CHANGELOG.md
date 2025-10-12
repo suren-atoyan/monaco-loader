@@ -1,3 +1,10 @@
+## 1.6.0
+###### *Oct 12, 2025*
+
+- monaco-editor: update to the latest version (0.54.0)
+- package: update all dependencies to the latest version
+- playground: update all dependencies to the latest version
+
 ## 1.5.0
 ###### *Feb 13, 2025*
 
