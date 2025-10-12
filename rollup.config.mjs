@@ -1,5 +1,5 @@
 import nodeResolve from '@rollup/plugin-node-resolve';
-import { terser } from 'rollup-plugin-terser';
+import terser from '@rollup/plugin-terser';
 import replace from '@rollup/plugin-replace';
 import commonjs from '@rollup/plugin-commonjs';
 import babel from '@rollup/plugin-babel';
@@ -9,7 +9,7 @@ const nodeResolvePlugin = nodeResolve(defaultNodeResolveConfig);
 
 const commonPlugins = [
   nodeResolvePlugin,
-  babel.default({
+  babel({
     presets: ['@babel/preset-env'],
     babelHelpers: 'bundled',
   }),
@@ -20,6 +20,7 @@ const developmentPlugins = [
   ...commonPlugins,
   replace({
     'process.env.NODE_ENV': JSON.stringify('development'),
+    preventAssignment: true,
   }),
 ];
 
@@ -27,6 +28,7 @@ const productionPlugins = [
   ...commonPlugins,
   replace({
     'process.env.NODE_ENV': JSON.stringify('production'),
+    preventAssignment: true,
   }),
   terser({ mangle: false }),
 ];
