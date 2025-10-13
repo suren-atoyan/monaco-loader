@@ -10,13 +10,13 @@ declare namespace loader {
   function init(): CancelablePromise<Monaco>;
   function config(params: {
     paths?: {
-      vs?: string;
-    };
+      vs?: string,
+    },
     'vs/nls'?: {
-      availableLanguages?: object;
-    };
-    monaco?: Monaco;
-    cspNonce?: string;
+      availableLanguages?: object,
+    },
+    monaco?: Monaco,
+    cspNonce?: string,
   }): void;
   function __getMonacoInstance(): Monaco | null;
 }
