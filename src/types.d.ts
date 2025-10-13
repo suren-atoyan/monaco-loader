@@ -1,4 +1,4 @@
-import * as monacoEditor from 'monaco-editor/esm/vs/editor/editor.api';
+import * as monacoEditor from "monaco-editor/esm/vs/editor/editor.api";
 
 export type Monaco = typeof monacoEditor;
 
@@ -10,12 +10,13 @@ declare namespace loader {
   function init(): CancelablePromise<Monaco>;
   function config(params: {
     paths?: {
-      vs?: string,
-    },
-    'vs/nls'?: {
-      availableLanguages?: object,
-    },
-    monaco?: Monaco,
+      vs?: string;
+    };
+    "vs/nls"?: {
+      availableLanguages?: object;
+    };
+    monaco?: Monaco;
+    cspNonce?: string;
   }): void;
   function __getMonacoInstance(): Monaco | null;
 }
