@@ -85,6 +85,9 @@ function injectScripts(script) {
  */
 function createScript(src) {
   const script = document.createElement('script');
+  if (state.config.cspNonce) {
+		script.setAttribute('nonce', state.config.cspNonce);
+  }
   return (src && (script.src = src), script);
 }
 

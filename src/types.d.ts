@@ -1,4 +1,4 @@
-import * as monacoEditor from "monaco-editor/esm/vs/editor/editor.api";
+import * as monacoEditor from 'monaco-editor/esm/vs/editor/editor.api';
 
 export type Monaco = typeof monacoEditor;
 
@@ -12,7 +12,7 @@ declare namespace loader {
     paths?: {
       vs?: string;
     };
-    "vs/nls"?: {
+    'vs/nls'?: {
       availableLanguages?: object;
     };
     monaco?: Monaco;
