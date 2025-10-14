@@ -2,7 +2,6 @@
   "name": "@monaco-editor/loader",
   "version": "1.6.0",
   "description": "the library aims to setup monaco editor into your browser",
-  "type": "module",
   "main": "lib/cjs/index.js",
   "module": "lib/es/index.js",
   "unpkg": "lib/umd/monaco-loader.min.js",
