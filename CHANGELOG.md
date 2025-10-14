@@ -1,3 +1,9 @@
+## 1.6.1
+###### *Oct 14, 2025*
+
+- eslint: use mjs for eslint config file
+- package: remove type field
+
 ## 1.6.0
 ###### *Oct 12, 2025*
 
