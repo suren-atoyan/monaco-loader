@@ -1,3 +1,9 @@
+## 1.7.0
+###### *Nov 21, 2025*
+
+- loader: merged #61 - add backward compatibility for 0.53 and 0.54 versions
+- monaco-editor: update to the latest version (0.55.1)
+
 ## 1.6.1
 ###### *Oct 14, 2025*
 
