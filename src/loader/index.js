@@ -116,7 +116,7 @@ function configureLoader() {
   require.config(state.config);
   require(
     ['vs/editor/editor.main'],
-    function({ m: monaco }) {
+    function(monaco) {
       storeMonacoInstance(monaco);
       state.resolve(monaco);
     },
