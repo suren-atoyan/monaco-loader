@@ -16,6 +16,7 @@ declare namespace loader {
       availableLanguages?: object,
     },
     monaco?: Monaco,
+    cspNonce?: string,
   }): void;
   function __getMonacoInstance(): Monaco | null;
 }
