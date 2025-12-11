@@ -31,7 +31,7 @@ function throwError(errorMessages, type) {
 const errorMessages = {
   configIsRequired: 'the configuration object is required',
   configType: 'the configuration object should be an object',
-  default: 'an unknown error accured in `@monaco-editor/loader` package',
+  default: 'an unknown error occurred in `@monaco-editor/loader` package',
 
   deprecation: `Deprecation warning!
     You are using deprecated way of configuration.
