@@ -1,4 +1,4 @@
-import * as monacoEditor from 'monaco-editor/esm/vs/editor/editor.api';
+import type * as monacoEditor from "monaco-editor/esm/vs/editor/editor.main.d.ts";
 
 export type Monaco = typeof monacoEditor;
 
