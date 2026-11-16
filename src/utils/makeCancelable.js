@@ -9,7 +9,10 @@ function makeCancelable(promise) {
   let hasCanceled_ = false;
 
   const wrappedPromise = new Promise((resolve, reject) => {
-    promise.then(val => hasCanceled_ ? reject(CANCELATION_MESSAGE) : resolve(val));
+    promise.then(
+      val => hasCanceled_ ? reject(CANCELATION_MESSAGE) : resolve(val),
+      reject,
+    );
     promise.catch(reject);
   });
 

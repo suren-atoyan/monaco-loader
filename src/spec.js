@@ -1,5 +1,6 @@
 import loader from '.';
 import { errorMessages } from './validators';
+import makeCancelable, { CANCELATION_MESSAGE } from './utils/makeCancelable';
 
 // the loader utility has three methods: `config`, `init` and `__getMonacoInstance`
 
@@ -78,5 +79,29 @@ describe('.__getMonacoInstance', () => {
   // as the initialization (.init) wasn't triggered
   test('should return null', () => {
     expect(loader.__getMonacoInstance()).toBe(undefined);
+  });
+});
+
+describe('makeCancelable', () => {
+  test('resolves with the original value', async () => {
+    const value = { editor: {} };
+
+    await expect(makeCancelable(Promise.resolve(value))).resolves.toBe(value);
+  });
+
+  test('handles rejection without leaking an unhandled rejection', async () => {
+    const reason = { type: 'error' };
+
+    await expect(makeCancelable(Promise.reject(reason))).rejects.toBe(reason);
+
+    // Allow unhandled rejections from derived promises to surface in Jest.
+    await new Promise(resolve => setImmediate(resolve));
+  });
+
+  test('rejects with the cancellation message when canceled before resolution', async () => {
+    const promise = makeCancelable(Promise.resolve({ editor: {} }));
+    promise.cancel();
+
+    await expect(promise).rejects.toBe(CANCELATION_MESSAGE);
   });
 });
